@@ -27,8 +27,6 @@
     if (self) {
         // Custom initialization
         self.title=@"Convert Temperature";
-        //[self.tempInCelsiusTextField setDelegate:self];
-        //[self.tempInFahrenheitTextField setDelegate:self];
     }
     return self;
 }
@@ -37,11 +35,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.convertButton setBackgroundColor:[UIColor grayColor]];
-    self.convertButton.showsTouchWhenHighlighted = YES;
+    [self.convertButton setBackgroundColor:[UIColor grayColor]]; //set convert button background color
+    self.convertButton.showsTouchWhenHighlighted = YES; // convert button highlughts on tap
     self.tempInFahrenheitTextField.tag = 1;
     self.tempInCelsiusTextField.tag = 2;
-    self.tempInCelsiusTextField.delegate = self;
+    self.tempInCelsiusTextField.delegate = self; // textfield calls back to converterViewController
     self.tempInFahrenheitTextField.delegate = self;
 }
 
@@ -52,14 +50,11 @@
 }
 
 - (IBAction)onTap:(id)sender {
-    [self.view endEditing:YES];
+    [self.view endEditing:YES]; // keyboard goes off
 }
 
 
 - (IBAction)convertButtonTouchDown:(id)sender {
-//    if (self.tempInFahrenheitTextField.text.length > 0) {
-//        [self convertTemperatures];
-//    }
     if (self.lastEditedTextField.text.length > 0) {
         [self convertTemperatures];
     }
@@ -76,27 +71,9 @@
         float tempInFahrenheit = (tempInCelsius*9/5) + 32;
         self.tempInFahrenheitTextField.text = [NSString stringWithFormat:@"%0.2f", tempInFahrenheit];
     }
-    //float tempInCelsius = [self.tempInCelsiusTextField.text floatValue];
-    
-    //NSLog(@"F = %f, C= %f", tempInFahrenheit, tempInCelsius);
 }
 
-//- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-//    if ([text isEqualToString:@"\n"])   {
-//        [textView resignFirstResponder];
-//        return NO;
-//    } else {
-//        return YES;
-//    }
-//}
-
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-//    if (textField.tag == 1){
-//        NSLog(@" clicked on F");
-//    }
-//    else if (textField.tag == 2){
-//        NSLog(@" clicked on C");
-//    }
-    self.lastEditedTextField = textField;
+    self.lastEditedTextField = textField; // make a note of the last edited text field
 }
 @end
