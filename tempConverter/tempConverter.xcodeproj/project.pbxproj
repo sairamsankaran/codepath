@@ -19,8 +19,6 @@
 		F88C160817FE827B00586854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88C15F017FE827B00586854 /* UIKit.framework */; };
 		F88C161017FE827B00586854 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F88C160E17FE827B00586854 /* InfoPlist.strings */; };
 		F88C161217FE827B00586854 /* tempConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F88C161117FE827B00586854 /* tempConverterTests.m */; };
-		F88C161E17FE82AB00586854 /* converterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88C161C17FE82AB00586854 /* converterViewController.m */; };
-		F88C161F17FE82AB00586854 /* converterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F88C161D17FE82AB00586854 /* converterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +48,6 @@
 		F88C160D17FE827B00586854 /* tempConverterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tempConverterTests-Info.plist"; sourceTree = "<group>"; };
 		F88C160F17FE827B00586854 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F88C161117FE827B00586854 /* tempConverterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tempConverterTests.m; sourceTree = "<group>"; };
-		F88C161B17FE82AB00586854 /* converterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = converterViewController.h; sourceTree = "<group>"; };
-		F88C161C17FE82AB00586854 /* converterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = converterViewController.m; sourceTree = "<group>"; };
-		F88C161D17FE82AB00586854 /* converterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = converterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,9 +111,6 @@
 				F88C15FC17FE827B00586854 /* AppDelegate.m */,
 				F88C15FE17FE827B00586854 /* Images.xcassets */,
 				F88C15F317FE827B00586854 /* Supporting Files */,
-				F88C161B17FE82AB00586854 /* converterViewController.h */,
-				F88C161C17FE82AB00586854 /* converterViewController.m */,
-				F88C161D17FE82AB00586854 /* converterViewController.xib */,
 			);
 			path = tempConverter;
 			sourceTree = "<group>";
@@ -228,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88C15F717FE827B00586854 /* InfoPlist.strings in Resources */,
-				F88C161F17FE82AB00586854 /* converterViewController.xib in Resources */,
 				F88C15FF17FE827B00586854 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +241,6 @@
 			files = (
 				F88C15FD17FE827B00586854 /* AppDelegate.m in Sources */,
 				F88C15F917FE827B00586854 /* main.m in Sources */,
-				F88C161E17FE82AB00586854 /* converterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +441,7 @@
 				F88C161717FE827B00586854 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F88C161817FE827B00586854 /* Build configuration list for PBXNativeTarget "tempConverterTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +450,7 @@
 				F88C161A17FE827B00586854 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

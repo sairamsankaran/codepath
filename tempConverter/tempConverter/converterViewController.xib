@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="converterViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConverterViewController">
             <connections>
                 <outlet property="convertButton" destination="Q5q-73-oSf" id="WDh-Na-obN"/>
                 <outlet property="tempInCelsiusTextField" destination="Nd8-e6-ZgO" id="ar4-FW-tnz"/>

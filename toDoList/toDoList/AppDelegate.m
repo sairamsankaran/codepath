@@ -1,13 +1,13 @@
 //
 //  AppDelegate.m
-//  tempConverter
+//  toDoList
 //
-//  Created by Sairam Sankaran on 10/3/13.
+//  Created by Sairam Sankaran on 10/11/13.
 //  Copyright (c) 2013 Sairam Sankaran. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "ConverterViewController.h"
+#import "ToDoListTableViewController.h"
 
 @implementation AppDelegate
 
@@ -15,9 +15,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    ConverterViewController *vc = [[ConverterViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    ToDoListTableViewController *tvc = [[ToDoListTableViewController alloc]init];
+    UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:tvc];
     self.window.rootViewController = nvc;
+    nvc.title=@"To Do List";
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

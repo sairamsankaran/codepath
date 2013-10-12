@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface converterViewController : UIViewController <UITextFieldDelegate>
+@interface ConverterViewController : UIViewController <UITextFieldDelegate>
 
 @end

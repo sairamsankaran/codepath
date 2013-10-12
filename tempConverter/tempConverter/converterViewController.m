@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Sairam Sankaran. All rights reserved.
 //
 
-#import "converterViewController.h"
+#import "ConverterViewController.h"
 
-@interface converterViewController ()
+@interface ConverterViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *tempInFahrenheitTextField;
 @property (weak, nonatomic) IBOutlet UITextField *tempInCelsiusTextField;
@@ -19,7 +19,7 @@
 - (void) convertTemperatures;
 @end
 
-@implementation converterViewController
+@implementation ConverterViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,5 +75,10 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.lastEditedTextField = textField; // make a note of the last edited text field
+}
+
+- (void) dealloc { // always set delegate to nil, even though this view never gets destroyed
+    [self.tempInCelsiusTextField setDelegate:nil];
+    [self.tempInFahrenheitTextField setDelegate:nil];
 }
 @end
