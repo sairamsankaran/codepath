@@ -1,5 +1,5 @@
 //
-//  toDoListTableViewController.m
+//  ToDoListTableViewController.m
 //  toDoList
 //
 //  Created by Sairam Sankaran on 10/11/13.
@@ -10,6 +10,8 @@
 #import "ToDoItemCell.h"
 
 @interface ToDoListTableViewController ()
+
+- (void)addNewItem;
 
 @end
 
@@ -28,14 +30,18 @@
 {
     [super viewDidLoad];
     
-    UINib *toDoItemNib = [UINib nibWithNibName:@"toDoItemCell" bundle:nil];
+    // create nib with cell nib. Use same name
+    UINib *toDoItemNib = [UINib nibWithNibName:@"ToDoItemCell" bundle:nil];
+    // register this newly created nib with the table view
     [self.tableView registerNib:toDoItemNib forCellReuseIdentifier:@"toDoItemCell"];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *newToDoItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem)];
+    self.navigationItem.rightBarButtonItem = newToDoItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,9 +66,6 @@
 {
     static NSString *CellIdentifier = @"toDoItemCell";
     ToDoItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
     return cell;
 }
 
@@ -116,5 +119,9 @@
 }
 
  */
+
+- (void)addNewItem {
+    NSLog(@"Added new item");
+}
 
 @end

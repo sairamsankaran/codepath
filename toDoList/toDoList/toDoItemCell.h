@@ -1,5 +1,5 @@
 //
-//  toDoItemCell.h
+//  ToDoItemCell.h
 //  toDoList
 //
 //  Created by Sairam Sankaran on 10/11/13.
@@ -10,6 +10,6 @@
 
 @interface ToDoItemCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *toDoItemCellTextField;
+@property (nonatomic, weak) IBOutlet UITextField *toDoItemTextField;
 
 @end

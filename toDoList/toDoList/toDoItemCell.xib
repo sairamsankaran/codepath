@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fjq-0b-Vo3">
-                        <rect key="frame" x="15" y="7" width="290" height="30"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Task" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TlI-xU-89J">
+                        <rect key="frame" x="16" y="7" width="293" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
@@ -22,7 +22,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="toDoItemCellTextField" destination="Fjq-0b-Vo3" id="vZD-o8-ohD"/>
+                <outlet property="toDoItemTextField" destination="TlI-xU-89J" id="Ptt-QZ-RTr"/>
             </connections>
         </tableViewCell>
     </objects>
