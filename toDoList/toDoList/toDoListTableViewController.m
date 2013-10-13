@@ -15,7 +15,9 @@
 
 @end
 
-@implementation ToDoListTableViewController
+@implementation ToDoListTableViewController {
+    int numberOfUserCreatedCells;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,7 +42,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    UIBarButtonItem *newToDoItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem)];
+    UIBarButtonItem *newToDoItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                 target:self
+                                                                                 action:@selector(addNewItem)];
     self.navigationItem.rightBarButtonItem = newToDoItem;
 }
 
@@ -64,8 +68,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%d", indexPath.section);
     static NSString *CellIdentifier = @"toDoItemCell";
     ToDoItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Set the delegate of text field item to be this table view controller
+    cell.toDoItemTextField.delegate = self;
+    
     return cell;
 }
 
@@ -120,7 +129,13 @@
 
  */
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES; // do default behaviour when user presses done/return
+}
+
 - (void)addNewItem {
+    
     NSLog(@"Added new item");
 }
 
