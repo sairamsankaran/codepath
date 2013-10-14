@@ -45,7 +45,7 @@
     [allItems removeObjectIdenticalTo:item];
 }
 
-- (void) moveItemAtIndex:(int)from toIndec:(int)to {
+- (void) moveItemAtIndex:(int)from toIndex:(int)to {
     if (from == to) {
         return;
     }

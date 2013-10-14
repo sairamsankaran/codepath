@@ -17,7 +17,7 @@
 - (NSArray *) allItems;
 - (NSMutableString *) createItem: (NSMutableString *)item;
 - (void) removeItem: (NSMutableString *)item;
-- (void) moveItemAtIndex:(int)from toIndec:(int)to;
+- (void) moveItemAtIndex:(int)from toIndex:(int)to;
 
 + (ToDoListItemStore *) sharedStore;
 

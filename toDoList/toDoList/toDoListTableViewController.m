@@ -79,6 +79,10 @@
     NSString *item = [[[ToDoListItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
     cell.toDoItemTextField.text = item;
     
+    if ([cell.toDoItemTextField.text isEqual:@""]) {
+        [cell.toDoItemTextField becomeFirstResponder];
+    }
+    
     // Set the delegate of text field item to be this table view controller
     cell.toDoItemTextField.delegate = self;
     
@@ -100,8 +104,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSMutableString *item = [[[ToDoListItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
-        [[ToDoListItemStore sharedStore] removeItem:item];
         // Delete the row from the data source
+        [[ToDoListItemStore sharedStore] removeItem:item];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
     }   
@@ -116,7 +120,7 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     [[ToDoListItemStore sharedStore] moveItemAtIndex:[fromIndexPath row]
-                                             toIndec:[toIndexPath row]];
+                                             toIndex:[toIndexPath row]];
 }
 
 
@@ -142,7 +146,7 @@
  */
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    int totalNumberOfItems = [[[ToDoListItemStore sharedStore] allItems] count];
+    int totalNumberOfItems = (int)[[[ToDoListItemStore sharedStore] allItems] count];
     // Get the shared store. Get all the items already in store. Get the last item. Set its string to be the user enrty
     [[[[ToDoListItemStore sharedStore] allItems] objectAtIndex:totalNumberOfItems-1] setString:textField.text];
     [textField resignFirstResponder];
@@ -151,14 +155,16 @@
 
 - (void)addNewItem:(id)sender {
     //NSLog(@"Added new item");
+    // Create new item in datastore with empty task
     NSString *newItem = [[ToDoListItemStore sharedStore] createItem:[NSMutableString stringWithString:@""]];
-//    int newRow = [[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
-    [[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
-    [[self tableView] reloadData];
+    // Commenting this because we reloading view instead ot inserting
+    int newRow = (int)[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
+    //[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
+    //[[self tableView] reloadData];
     
-//    NSIndexPath *ip = [NSIndexPath indexPathForRow:newRow inSection:0];
-//    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObjects:ip, nil]
-//                            withRowAnimation:UITableViewRowAnimationBottom];
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:newRow inSection:0];
+    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObjects:ip, nil]
+                            withRowAnimation:UITableViewRowAnimationBottom];
     
 }
 
