@@ -17,7 +17,7 @@
 @end
 
 @implementation ToDoListTableViewController {
-    int numberOfUserCreatedCells;
+    int indexOfLastAddedItem;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -79,9 +79,9 @@
     NSString *item = [[[ToDoListItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
     cell.toDoItemTextField.text = item;
     
-//    if () {
-//        [cell.toDoItemTextField becomeFirstResponder];
-//    }
+    if ([indexPath row] == indexOfLastAddedItem) {
+        [cell.toDoItemTextField becomeFirstResponder];
+    }
     
     // Set the delegate of text field item to be this table view controller
     cell.toDoItemTextField.delegate = self;
@@ -158,7 +158,8 @@
     // Create new item in datastore with empty task
     NSString *newItem = [[ToDoListItemStore sharedStore] createItem:[NSMutableString stringWithString:@""]];
     // Commenting this because we reloading view instead ot inserting
-    int newRow = (int)[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem]; 
+    int newRow = (int)[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
+    indexOfLastAddedItem = newRow;
     //[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
     //[[self tableView] reloadData];
     
