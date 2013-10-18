@@ -36,7 +36,7 @@
 }
 
 - (void) setAllItems: (NSMutableArray *) listItems{
-    self.allItems = listItems;
+    self.allItems = listItems;  
 }
 
 - (NSMutableString *) createItem: (NSMutableString *)item {

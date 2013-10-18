@@ -52,6 +52,17 @@
                                                                                  target:self
                                                                                  action:@selector(addNewItem:)];
     self.navigationItem.rightBarButtonItem = newToDoItem;
+    
+    // retrieve userdefaults and populate allItems
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray *list = nil;
+    if ([prefs arrayForKey:@"cachedItems"]) {
+        list = [prefs arrayForKey:@"cachedItems"];
+//        [[ToDoListItemStore sharedStore] setAllItems:[list mutableCopy]];
+        [[ToDoListItemStore sharedStore] setAllItems:[list mutableCopy]];
+        NSLog(@"cachedItems found");
+    };
+    NSLog(@"%@, list = %@", prefs, list);
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,7 +181,7 @@
     
     NSIndexPath *ip = [NSIndexPath indexPathForRow:newRow inSection:0];
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObjects:ip, nil]
-                            withRowAnimation:UITableViewRowAnimationBottom];
+                            withRowAnimation:UITableViewRowAnimationTop];
     
 }
 

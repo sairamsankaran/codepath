@@ -13,13 +13,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Task" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TlI-xU-89J">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Task" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TlI-xU-89J">
                         <rect key="frame" x="16" y="7" width="293" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="TlI-xU-89J" firstAttribute="leading" secondItem="sjC-we-zxD" secondAttribute="leading" constant="16" id="EsO-bI-A81"/>
+                    <constraint firstAttribute="bottom" secondItem="TlI-xU-89J" secondAttribute="bottom" constant="6" id="Esk-Ga-L2w"/>
+                    <constraint firstItem="TlI-xU-89J" firstAttribute="top" secondItem="sjC-we-zxD" secondAttribute="top" constant="7" id="JWu-8r-dGH"/>
+                    <constraint firstAttribute="trailing" secondItem="TlI-xU-89J" secondAttribute="trailing" constant="11" id="o0x-XN-8rV"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="toDoItemTextField" destination="TlI-xU-89J" id="Ptt-QZ-RTr"/>
