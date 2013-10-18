@@ -35,9 +35,19 @@
     return allItems;
 }
 
+- (void) setAllItems: (NSMutableArray *) listItems{
+    self.allItems = listItems;
+}
+
 - (NSMutableString *) createItem: (NSMutableString *)item {
     //NSString *item = newItem;
     [allItems addObject:item];
+    
+    // update userdefaults. i.e. persist items on device when allItems is updated
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:allItems forKey:@"cachedItems"];
+    NSLog(@"%@", prefs);
+    
     return item;
 }
 

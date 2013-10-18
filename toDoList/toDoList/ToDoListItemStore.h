@@ -15,6 +15,7 @@
 }
 
 - (NSArray *) allItems;
+- (void) setAllItems: (NSMutableArray *) listItems;
 - (NSMutableString *) createItem: (NSMutableString *)item;
 - (void) removeItem: (NSMutableString *)item;
 - (void) moveItemAtIndex:(int)from toIndex:(int)to;
