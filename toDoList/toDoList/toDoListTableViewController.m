@@ -78,6 +78,7 @@
     
     NSString *item = [[[ToDoListItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
     cell.toDoItemTextField.text = item;
+    cell.toDoItemTextField.tag = (int)[indexPath row]; // each textfield is tagged with its index
     
     if ([indexPath row] == indexOfLastAddedItem) {
         [cell.toDoItemTextField becomeFirstResponder];
@@ -119,8 +120,8 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    [[ToDoListItemStore sharedStore] moveItemAtIndex:[fromIndexPath row]
-                                             toIndex:[toIndexPath row]];
+    [[ToDoListItemStore sharedStore] moveItemAtIndex:(int)[fromIndexPath row]
+                                             toIndex:(int)[toIndexPath row]];
 }
 
 
@@ -146,9 +147,13 @@
  */
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    int totalNumberOfItems = (int)[[[ToDoListItemStore sharedStore] allItems] count];
+    //int totalNumberOfItems = (int)[[[ToDoListItemStore sharedStore] allItems] count];
     // Get the shared store. Get all the items already in store. Get the last item. Set its string to be the user enrty
-    [[[[ToDoListItemStore sharedStore] allItems] objectAtIndex:totalNumberOfItems-1] setString:textField.text];
+    //[[[[ToDoListItemStore sharedStore] allItems] objectAtIndex:totalNumberOfItems-1] setString:textField.text];
+    
+    // Get the shared store. Get the index of item to edit. Set its string to be the user enrty
+    [[[[ToDoListItemStore sharedStore] allItems] objectAtIndex:textField.tag] setString:textField.text];
+    
     [textField resignFirstResponder];
     return YES; // do default behaviour when user presses done/return
 }
@@ -157,7 +162,7 @@
     //NSLog(@"Added new item");
     // Create new item in datastore with empty task
     NSString *newItem = [[ToDoListItemStore sharedStore] createItem:[NSMutableString stringWithString:@""]];
-    // Commenting this because we reloading view instead ot inserting
+    // Comment this line if you reload view instead ot inserting
     int newRow = (int)[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
     indexOfLastAddedItem = newRow;
     //[[[ToDoListItemStore sharedStore] allItems] indexOfObject:newItem];
