@@ -58,11 +58,11 @@
     NSArray *list = nil;
     if ([prefs arrayForKey:@"cachedItems"]) {
         list = [prefs arrayForKey:@"cachedItems"];
-//        [[ToDoListItemStore sharedStore] setAllItems:[list mutableCopy]];
         [[ToDoListItemStore sharedStore] setAllItems:[list mutableCopy]];
+        //[[ToDoListItemStore sharedStore] setAllItems];
         NSLog(@"cachedItems found");
     };
-    NSLog(@"%@, list = %@", prefs, list);
+    //NSLog(@"%@, list = %@", prefs, list);
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,6 +164,11 @@
     
     // Get the shared store. Get the index of item to edit. Set its string to be the user enrty
     [[[[ToDoListItemStore sharedStore] allItems] objectAtIndex:textField.tag] setString:textField.text];
+    
+    // update userdefaults. i.e. persist items on device when allItems is updated
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[[ToDoListItemStore sharedStore] allItems] forKey:@"cachedItems"];
+    NSLog(@"cache updated with field edit");
     
     [textField resignFirstResponder];
     return YES; // do default behaviour when user presses done/return
