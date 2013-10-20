@@ -26,9 +26,11 @@
 
 // one method for every resource to be attached
 - (void)boxOffice {
+    NSLog(@"In boxOffice");
     [self getPath:@"lists/movies/box_office.json"
        parameters:@{@"apikey": @"g9au4hv6khv6wzvzgt55gpqs"}
           success:^(AFHTTPRequestOperation *operation, id responseObject) { // if the request is successful
+              NSLog(@"Request Success");
               NSArray *movies = [responseObject objectForKey:@"movies"];
               //NSLog(@"moives: %@", movies);
               [MovieDataStore moviesWithJSON:movies];

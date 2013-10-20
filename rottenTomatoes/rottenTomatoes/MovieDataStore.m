@@ -41,6 +41,7 @@
 }
 
 + (void)moviesWithJSON:(NSArray *)jsonArray {
+    NSLog(@"In moviesWithJSON");
     //    for (NSDictionary *jsonMovie in jsonArray) {
     //        Movie *movie = [[Movie alloc] init];
     //        NSString *title = [jsonMovie valueForKey:@"title"];

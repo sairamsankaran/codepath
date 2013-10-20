@@ -26,11 +26,13 @@
     if (self) {
         // Custom initialization
     }
+    NSLog(@"In initWithNibName");
     return self;
 }
 
 // storyboard calls this initializer instead
 - (id) initWithCoder:(NSCoder *)aDecoder {
+    NSLog(@"In initWithCoder");
     self = [super initWithCoder:aDecoder];
     if (self) {
         RottenTomatoesClient *client = [[RottenTomatoesClient alloc] init];
@@ -45,6 +47,7 @@
 	// Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    NSLog(@"In viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +67,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"In tableView:cellForRowAtIndexPath");
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCellIdentifier"];
     cell.titleLabel.text = @"Star Wars";
     cell.castLabel.text = @"Harrison Ford";
