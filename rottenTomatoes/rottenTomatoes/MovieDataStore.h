@@ -17,6 +17,6 @@
 + (MovieDataStore *) sharedStore;
 // factory or class method because, need to use for various endpoints
 // i.e. movies are returned not by just box_office in the API
-+ (void)moviesWithJSON:(NSArray *)jsonArray;
++ (NSArray *)moviesWithJSON:(NSArray *)jsonArray;
 
 @end

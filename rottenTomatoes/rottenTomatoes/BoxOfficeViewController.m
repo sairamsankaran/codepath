@@ -14,6 +14,7 @@
 @interface BoxOfficeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *movies;
 
 @end
 
@@ -26,18 +27,24 @@
     if (self) {
         // Custom initialization
     }
-    NSLog(@"In initWithNibName");
     return self;
 }
 
 // storyboard calls this initializer instead
 - (id) initWithCoder:(NSCoder *)aDecoder {
-    NSLog(@"In initWithCoder");
     self = [super initWithCoder:aDecoder];
     if (self) {
         RottenTomatoesClient *client = [[RottenTomatoesClient alloc] init];
-        [client boxOffice];
-    }
+        //[client boxOffice];
+        [client boxOfficeWithSuccess:^(AFHTTPRequestOperation *operation, NSArray *movies) {
+            self.movies = movies;
+            [self.tableView reloadData];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }];
+        }
     return self;
 }
 
@@ -47,7 +54,6 @@
 	// Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    NSLog(@"In viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,15 +69,15 @@
 }
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.movies count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"In tableView:cellForRowAtIndexPath");
-    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCellIdentifier"];
-    cell.titleLabel.text = @"Star Wars";
-    cell.castLabel.text = @"Harrison Ford";
-    NSLog(@"Movie title from VC: %@", [[MovieDataStore sharedStore] boxOfficeMovies]);
+    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCellIdentifier" forIndexPath:indexPath];
+    cell.movie = self.movies[indexPath.row];
+//    cell.titleLabel.text = @"Star Wars";
+//    cell.castLabel.text = @"Harrison Ford";
+//    NSLog(@"Movie title from VC: %@", [[MovieDataStore sharedStore] boxOfficeMovies]);
 //    cell.titleLabel.text = [[[MovieDataStore sharedStore] boxOfficeMovies] objectAtIndex:[indexPath row]];
 //    cell.castLabel.text = @"Harrison Ford";
 

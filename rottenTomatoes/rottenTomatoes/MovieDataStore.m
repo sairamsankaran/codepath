@@ -40,22 +40,19 @@
     [boxOfficeMovies addObject:movie];
 }
 
-+ (void)moviesWithJSON:(NSArray *)jsonArray {
-    NSLog(@"In moviesWithJSON");
-    //    for (NSDictionary *jsonMovie in jsonArray) {
-    //        Movie *movie = [[Movie alloc] init];
-    //        NSString *title = [jsonMovie valueForKey:@"title"];
-    //        movie.title = title;
-    //        [[MovieDataStore sharedStore] addMovieToStore:movie];
-    //    }
-    Movie *movie = [[Movie alloc] init];
-    NSString *title = @"Captain Philips";
-    NSString *cast = @"Tom Hanks";
-    movie.title = title;
-    movie.cast = cast;
-    [[MovieDataStore sharedStore] addMovieToStore:movie];
-    NSLog(@"Captain Hanks added to data store");
-    NSLog(@"Movie title: %@", [[[[MovieDataStore sharedStore] boxOfficeMovies] objectAtIndex:0] title]);
++ (NSArray *)moviesWithJSON:(NSArray *)jsonArray {
+    for (NSDictionary *jsonMovie in jsonArray) {
+        Movie *movie = [[Movie alloc] init];
+        NSString *title = [jsonMovie valueForKey:@"title"];
+        movie.title = title;
+        NSMutableArray *stars = [[NSMutableArray alloc] init];
+        for (NSDictionary *member in [jsonMovie objectForKey:@"abridged_cast"]) {
+            [stars addObject:[member objectForKey:@"name"]];
+        }
+        movie.cast = [stars componentsJoinedByString:@", "];
+        [[MovieDataStore sharedStore] addMovieToStore:movie];
+    }
+    return [[MovieDataStore sharedStore] boxOfficeMovies];
 }
 
 @end

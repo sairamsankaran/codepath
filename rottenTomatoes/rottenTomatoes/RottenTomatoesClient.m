@@ -26,11 +26,9 @@
 
 // one method for every resource to be attached
 - (void)boxOffice {
-    NSLog(@"In boxOffice");
     [self getPath:@"lists/movies/box_office.json"
        parameters:@{@"apikey": @"g9au4hv6khv6wzvzgt55gpqs"}
           success:^(AFHTTPRequestOperation *operation, id responseObject) { // if the request is successful
-              NSLog(@"Request Success");
               NSArray *movies = [responseObject objectForKey:@"movies"];
               //NSLog(@"moives: %@", movies);
               [MovieDataStore moviesWithJSON:movies];
@@ -38,6 +36,21 @@
           failure:^(AFHTTPRequestOperation *operation, NSError *error) { // if the request failed
               NSLog(@"error: %@", [error description]);
           }];
+}
+
+- (void)boxOfficeWithSuccess:(void (^)(AFHTTPRequestOperation *, NSArray *))success
+                     failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    [self getPath:@"lists/movies/box_office.json"
+       parameters:@{@"apikey" : @"g9au4hv6khv6wzvzgt55gpqs" }
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"%@", responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSArray *jsonArray = [responseObject objectForKey:@"movies"];
+            NSArray *movies = [MovieDataStore moviesWithJSON:jsonArray];
+            success(operation, movies);
+        }
+    } failure:failure];
 }
 
 @end

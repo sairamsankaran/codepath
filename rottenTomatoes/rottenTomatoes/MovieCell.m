@@ -33,4 +33,10 @@
     // Configure the view for the selected state
 }
 
+- (void)setMovie:(Movie *)movie
+{
+    self.titleLabel.text = movie.title;
+    self.castLabel.text = movie.cast;
+}
+
 @end

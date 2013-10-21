@@ -12,4 +12,7 @@
 
 - (void)boxOffice;
 
+- (void)boxOfficeWithSuccess:(void (^)(AFHTTPRequestOperation *operation, NSArray *movies))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end
