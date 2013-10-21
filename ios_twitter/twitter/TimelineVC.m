@@ -7,6 +7,7 @@
 //
 
 #import "TimelineVC.h"
+#import "TweetCell.h"
 
 @interface TimelineVC ()
 
@@ -35,6 +36,11 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    
+    // create nib with cell nib. Use same name
+    UINib *tweetCellNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
+    // register this newly created nib with the table view
+    [self.tableView registerNib:tweetCellNib forCellReuseIdentifier:@"TweetCell"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -63,14 +69,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-
-    Tweet *tweet = self.tweets[indexPath.row];
-    cell.textLabel.text = tweet.text;
+//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+//    Tweet *tweet = self.tweets[indexPath.row];
+//    cell.textLabel.text = tweet.text;
     
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    Tweet *tweet = self.tweets[indexPath.row];
+    cell.userNameTextLabel.text = tweet.userName;// @"Test";
+    cell.tweetTextLabel.text = tweet.text;
+    cell.tweetTextLabel.numberOfLines = 0;
+    //[tweet userImageURL];
+    cell.userImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tweet userImageURL]]]];
+//    cell.tweetTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    NSDate* currentDate = [NSDate date];
+    NSLog(@"Date: %@", currentDate);
+    cell.tweetAgeTextLabel.text = @"2d";
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70;
 }
 
 /*
@@ -138,7 +157,7 @@
 
 - (void)reload {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"%@", response);
+        //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
