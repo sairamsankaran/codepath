@@ -19,7 +19,18 @@
 }
 
 - (NSString *)createdAt {
-    return [self.data valueOrNilForKeyPath:@"created_at"];
+    NSString *dateStr = [self.data valueOrNilForKeyPath:@"created_at"];
+    
+    // Convert string to date object
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
+    NSDate *date = [dateFormatter dateFromString:dateStr];
+    
+    // Convert date object to desired output format
+    [dateFormatter setDateFormat:@"MM/dd/YY"];
+    dateStr = [dateFormatter stringFromDate:date];
+    
+    return dateStr;
 }
 
 - (NSString *)userImageURL {
