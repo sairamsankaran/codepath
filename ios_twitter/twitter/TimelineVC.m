@@ -9,6 +9,7 @@
 #import "TimelineVC.h"
 #import "TweetCell.h"
 #import "TweetVC.h"
+#import "ComposeVC.h"
 
 @interface TimelineVC ()
 
@@ -36,8 +37,8 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
     
     // create nib with cell nib. Use same name
     UINib *tweetCellNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
@@ -167,7 +168,9 @@
 }
 
 - (void)onComposeButton {
-
+    ComposeVC *cvc = [[ComposeVC alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (void)reload {
