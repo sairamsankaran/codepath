@@ -10,6 +10,7 @@
 #import "TweetCell.h"
 #import "TweetVC.h"
 #import "ComposeVC.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TimelineVC ()
 
@@ -37,14 +38,23 @@
 {
     [super viewDidLoad];
     
+    // Add navigator buttons
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
     
-    // create nib with cell nib. Use same name
+    // create nib with cell nib. Use same name as xib
     UINib *tweetCellNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
-    // register this newly created nib with the table view
+    // register this newly created nib with the table view.
+    // Use same identifier as mentioned in interface builder
     [self.tableView registerNib:tweetCellNib forCellReuseIdentifier:@"TweetCell"];
-
+    
+    // Pull to refresh functionality for table view
+    // For this to work, the View Controller must be a subclass of TableViewController
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refreshControl addTarget:self action:@selector(getFeed) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -96,6 +106,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //    NSString *tweetText = [self.tweets[indexPath.row] text];
+    //    NSLog(@"%@", tweetText);
+    //    CGSize tweetSize = [tweetText sizeWithFont:[UIFont fontWithName:@"Helvetica Neue" size:14.0]
+    //                                  forWidth:260.0
+    //                             lineBreakMode:NSLineBreakByWordWrapping];
+    //    NSLog(@"%f", tweetSize.height);
+    //    return tweetSize.height + 40;
     return 70;
 }
 
@@ -163,6 +180,21 @@
 
 #pragma mark - Private methods
 
+// Dismiss refresh animation after data update
+- (void)stopRefresh {
+    [self.refreshControl endRefreshing];
+}
+
+// Get new data to display
+- (void)getFeed {
+//    NSLog(@"Feed refreshed");
+    //self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Loading ..."];
+    [self reload];
+    // Call stopRefresh after a delay of 2.5 seconds
+    // Assuming 2.5 seconds are enough to fetch new data
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
+}
+
 - (void)onSignOutButton {
     [User setCurrentUser:nil];
 }
@@ -179,7 +211,8 @@
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // Do nothing
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }];
 }
 
