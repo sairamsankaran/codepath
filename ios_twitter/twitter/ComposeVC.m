@@ -7,6 +7,7 @@
 //
 
 #import "ComposeVC.h"
+#import "TwitterClient.h"
 
 @interface ComposeVC ()
 
@@ -41,8 +42,26 @@
 }
 
 - (void)onTweetButton {
-    NSLog(@"%@", self.composeTweetTextView.text);
-    [[self navigationController] setTitle:self.composeTweetTextView.text];
+//    [[self navigationController] setTitle:self.composeTweetTextView.text];
+    [[TwitterClient instance] tweetUserStatus:self.composeTweetTextView.text
+                                  withSuccess:^(AFHTTPRequestOperation *operation, id response) {
+                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                                                      message:@"Tweet Posted."
+                                                                                     delegate:nil
+                                                                            cancelButtonTitle:nil
+                                                                            otherButtonTitles:nil];
+                                      [alert show];
+                                      [alert dismissWithClickedButtonIndex:0 animated:YES];
+                                  }
+                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                          message:[error localizedDescription]
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                      }
+     ];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

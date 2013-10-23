@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetVC">
             <connections>
+                <outlet property="replyTextField" destination="I9Y-5e-Vhu" id="HTb-AG-oZ9"/>
                 <outlet property="tweetAgeTextLabel" destination="ftJ-0c-bfk" id="UMw-Dy-48t"/>
                 <outlet property="tweetTextLabel" destination="g8F-iC-3Jb" id="Q1U-up-ksa"/>
                 <outlet property="userImageView" destination="MVi-ah-l15" id="iJY-DA-agg"/>
@@ -23,14 +24,14 @@
                     <rect key="frame" x="20" y="88" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="kW4-lX-rbh"/>
+                        <constraint firstAttribute="width" constant="50" id="WRP-Wf-EB6"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhQ-E9-qFp">
                     <rect key="frame" x="78" y="88" width="200" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="4YF-zV-io0"/>
+                        <constraint firstAttribute="height" constant="25" id="XQ4-TY-Ibw"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                     <nil key="highlightedColor"/>
@@ -39,7 +40,7 @@
                     <rect key="frame" x="20" y="164" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="Qa0-a3-2aO"/>
+                        <constraint firstAttribute="height" constant="50" id="Lvz-5p-sep"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <nil key="highlightedColor"/>
@@ -48,30 +49,97 @@
                     <rect key="frame" x="20" y="236" width="45" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="Xsa-g0-waS"/>
-                        <constraint firstAttribute="width" constant="45" id="x7g-64-O4c"/>
+                        <constraint firstAttribute="width" constant="45" id="2ty-ed-k7H"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-ml-tio">
+                    <rect key="frame" x="60" y="264" width="70" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="lSa-Cl-MRW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="RETWEET">
+                        <color key="titleColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="retweetButtonTouchDown:" destination="-1" eventType="touchDown" id="pUJ-aP-zGZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMX-44-vah">
+                    <rect key="frame" x="173" y="264" width="87" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="FAVOURITE">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="favouriteButtonTouchDown:" destination="-1" eventType="touchDown" id="RmO-jG-PXS"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reply" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I9Y-5e-Vhu">
+                    <rect key="frame" x="0.0" y="305" width="278" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" keyboardType="twitter"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRj-3V-Kfk">
+                    <rect key="frame" x="278" y="305" width="42" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="Tweet">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tweetButtonTouchDown:" destination="-1" eventType="touchDown" id="P8R-mH-W0E"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="ftJ-0c-bfk" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="22" id="09u-rr-Up1"/>
-                <constraint firstAttribute="trailing" secondItem="xhQ-E9-qFp" secondAttribute="trailing" constant="42" id="0Pc-w8-Tfp"/>
-                <constraint firstItem="MVi-ah-l15" firstAttribute="leading" secondItem="g8F-iC-3Jb" secondAttribute="leading" id="0fS-ey-6dn"/>
-                <constraint firstItem="g8F-iC-3Jb" firstAttribute="top" secondItem="xhQ-E9-qFp" secondAttribute="bottom" constant="51" id="8KO-vX-aVp"/>
-                <constraint firstItem="xhQ-E9-qFp" firstAttribute="leading" secondItem="MVi-ah-l15" secondAttribute="trailing" constant="8" symbolic="YES" id="F7L-0J-7No"/>
-                <constraint firstItem="MVi-ah-l15" firstAttribute="top" secondItem="xhQ-E9-qFp" secondAttribute="top" id="I23-gJ-8Gk"/>
-                <constraint firstItem="MVi-ah-l15" firstAttribute="top" secondItem="1" secondAttribute="top" constant="88" id="IWs-uL-m2K"/>
-                <constraint firstItem="g8F-iC-3Jb" firstAttribute="top" secondItem="MVi-ah-l15" secondAttribute="bottom" constant="26" id="SQs-d3-EIu"/>
-                <constraint firstItem="MVi-ah-l15" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="Wy2-Lo-Ldt"/>
-                <constraint firstAttribute="trailing" secondItem="g8F-iC-3Jb" secondAttribute="trailing" constant="20" symbolic="YES" id="eZA-WL-HSq"/>
-                <constraint firstItem="ftJ-0c-bfk" firstAttribute="leading" secondItem="g8F-iC-3Jb" secondAttribute="leading" id="qYq-DQ-ugd"/>
+                <constraint firstItem="g8F-iC-3Jb" firstAttribute="leading" secondItem="ftJ-0c-bfk" secondAttribute="leading" id="0Pe-RH-1bk"/>
+                <constraint firstItem="g8F-iC-3Jb" firstAttribute="top" secondItem="MVi-ah-l15" secondAttribute="bottom" constant="26" id="0Qd-aH-c1n"/>
+                <constraint firstItem="MVi-ah-l15" firstAttribute="top" secondItem="xhQ-E9-qFp" secondAttribute="top" id="8NW-i8-tHa"/>
+                <constraint firstItem="FRj-3V-Kfk" firstAttribute="leading" secondItem="I9Y-5e-Vhu" secondAttribute="trailing" id="AYQ-ub-hDx"/>
+                <constraint firstItem="MVi-ah-l15" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="EEK-6T-tHY"/>
+                <constraint firstItem="aMX-44-vah" firstAttribute="leading" secondItem="aj0-ml-tio" secondAttribute="trailing" constant="43" id="ICp-CA-Vfm"/>
+                <constraint firstItem="MVi-ah-l15" firstAttribute="leading" secondItem="g8F-iC-3Jb" secondAttribute="leading" id="JrA-Ot-g2T"/>
+                <constraint firstItem="xhQ-E9-qFp" firstAttribute="leading" secondItem="MVi-ah-l15" secondAttribute="trailing" constant="8" symbolic="YES" id="LZM-0l-nYl"/>
+                <constraint firstItem="aMX-44-vah" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="50" id="Nb0-8q-UGb"/>
+                <constraint firstItem="aMX-44-vah" firstAttribute="top" secondItem="aj0-ml-tio" secondAttribute="top" id="Q01-PM-OdK"/>
+                <constraint firstItem="FRj-3V-Kfk" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="91" id="Vd5-uL-G5b"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="top" secondItem="FRj-3V-Kfk" secondAttribute="top" id="VhU-MH-KGB"/>
+                <constraint firstAttribute="trailing" secondItem="g8F-iC-3Jb" secondAttribute="trailing" constant="20" symbolic="YES" id="XpE-2N-y8A"/>
+                <constraint firstItem="aj0-ml-tio" firstAttribute="top" secondItem="ftJ-0c-bfk" secondAttribute="bottom" constant="8" symbolic="YES" id="YdF-IY-Crs"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="top" secondItem="aj0-ml-tio" secondAttribute="bottom" constant="11" id="cew-Go-lEx"/>
+                <constraint firstItem="aj0-ml-tio" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="60" id="dlb-Dn-LH4"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="bottom" secondItem="FRj-3V-Kfk" secondAttribute="bottom" id="g6C-MA-L8L"/>
+                <constraint firstItem="g8F-iC-3Jb" firstAttribute="top" secondItem="xhQ-E9-qFp" secondAttribute="bottom" constant="51" id="hj0-5C-4uM"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="baseline" secondItem="FRj-3V-Kfk" secondAttribute="baseline" id="j5l-TZ-MWy"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="trailing" secondItem="xhQ-E9-qFp" secondAttribute="trailing" id="lxL-nH-tLh"/>
+                <constraint firstAttribute="trailing" secondItem="xhQ-E9-qFp" secondAttribute="trailing" constant="42" id="pAI-D1-eFX"/>
+                <constraint firstItem="aMX-44-vah" firstAttribute="bottom" secondItem="aj0-ml-tio" secondAttribute="bottom" id="rnf-fT-FCy"/>
+                <constraint firstAttribute="trailing" secondItem="FRj-3V-Kfk" secondAttribute="trailing" id="sLy-Wa-O45"/>
+                <constraint firstItem="ftJ-0c-bfk" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="22" id="tIN-Gr-AvU"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="udd-CO-kVR"/>
+                <constraint firstAttribute="trailing" secondItem="aMX-44-vah" secondAttribute="trailing" constant="60" id="wHY-uG-bii"/>
+                <constraint firstItem="MVi-ah-l15" firstAttribute="top" secondItem="1" secondAttribute="top" constant="88" id="wdp-EM-EO2"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="Jbt-Ui-fN5" appends="YES" id="e4Q-HB-e2Z"/>
+            </connections>
         </view>
+        <tapGestureRecognizer id="Jbt-Ui-fN5">
+            <connections>
+                <action selector="onTap:" destination="-1" id="y8Z-KP-8j2"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

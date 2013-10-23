@@ -65,6 +65,58 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
 }
 
+- (void) tweetUserStatus:(NSString *)status
+             withSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"status":status}];
+    [self postPath:@"1.1/statuses/update.json"
+        parameters:params
+           success:success
+           failure:failure];
+}
+
+- (void) replyWithStatus:(NSString *)status
+            toStatusWithId:(NSString *)idStr
+             withSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSNumberFormatter *tI = [[NSNumberFormatter alloc] init];
+    [tI setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *tweetId = [tI numberFromString:idStr];
+    NSMutableDictionary *params = [NSMutableDictionary
+                                   dictionaryWithDictionary:@{@"status":status, @"in_reply_to_status_id":tweetId}];
+    [self postPath:@"1.1/statuses/update.json"
+        parameters:params
+           success:success
+           failure:failure];
+}
+
+- (void) reTweetStatusWithId:(NSString *)idStr
+             withSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSNumberFormatter *tI = [[NSNumberFormatter alloc] init];
+    [tI setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *tweetId = [tI numberFromString:idStr];
+    NSLog(@"%@",tweetId);
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id":tweetId}];
+    [self postPath:@"1.1/statuses/retweet/:id.json"
+        parameters:params
+           success:success
+           failure:failure];
+}
+
+- (void) favouriteStatusWithId:(NSString *)idStr
+                 withSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSNumberFormatter *tI = [[NSNumberFormatter alloc] init];
+    [tI setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *tweetId = [tI numberFromString:idStr];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id":tweetId}];
+    [self postPath:@"1.1/favorites/create.json"
+        parameters:params
+           success:success
+           failure:failure];
+}
+
 #pragma mark - Private methods
 
 - (void)setAccessToken:(AFOAuth1Token *)accessToken {

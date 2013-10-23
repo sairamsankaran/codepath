@@ -8,8 +8,16 @@
 
 #import "TweetVC.h"
 #import "Tweet.h"
+#import "TwitterClient.h"
 
 @interface TweetVC ()
+
+@property (weak, nonatomic) IBOutlet UITextField *replyTextField;
+
+- (IBAction)onTap:(id)sender;
+- (IBAction)retweetButtonTouchDown:(id)sender;
+- (IBAction)favouriteButtonTouchDown:(id)sender;
+- (IBAction)tweetButtonTouchDown:(id)sender;
 
 @end
 
@@ -45,6 +53,74 @@
     [l setCornerRadius:20.0];
     self.tweetTextLabel.text = self.tweet.text;
     self.tweetAgeTextLabel.text = self.tweet.createdAt;
+}
+
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES]; // keyboard goes off
+}
+
+- (IBAction)retweetButtonTouchDown:(id)sender {
+    NSLog(@"Retweeted");
+    NSLog(@"%@", self.tweet.tweetIdStr);
+    [[TwitterClient instance] reTweetStatusWithId:self.tweet.tweetIdStr
+                                      withSuccess:^(AFHTTPRequestOperation *operation, id response) {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                                                          message:@"Retweeted."
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:nil
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                          [alert dismissWithClickedButtonIndex:0 animated:YES];
+                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                          message:[error localizedDescription]
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                      }];
+}
+
+- (IBAction)favouriteButtonTouchDown:(id)sender {
+    [[TwitterClient instance] favouriteStatusWithId:self.tweet.tweetIdStr
+                                      withSuccess:^(AFHTTPRequestOperation *operation, id response) {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                                                          message:@"Favourited."
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:nil
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                          [alert dismissWithClickedButtonIndex:0 animated:YES];
+                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                          message:[error localizedDescription]
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil];
+                                          [alert show];
+                                      }];
+}
+
+- (IBAction)tweetButtonTouchDown:(id)sender {
+    [[TwitterClient instance] replyWithStatus:self.replyTextField.text
+                               toStatusWithId:self.tweet.tweetIdStr
+                                  withSuccess:^(AFHTTPRequestOperation *operation, id response) {
+                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
+                                                                                      message:@"Replied."
+                                                                                     delegate:nil
+                                                                            cancelButtonTitle:nil
+                                                                            otherButtonTitles:nil];
+                                      [alert show];
+                                      [alert dismissWithClickedButtonIndex:0 animated:YES];
+                                      [self.view endEditing:YES];
+                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                                      message:[error localizedDescription]
+                                                                                     delegate:nil
+                                                                            cancelButtonTitle:@"OK"
+                                                                            otherButtonTitles:nil];
+                                      [alert show];
+                                  }];
 }
 
 @end

@@ -14,6 +14,10 @@
     return [self.data valueOrNilForKeyPath:@"text"];
 }
 
+- (NSString *)tweetIdStr {
+    return [self.data valueOrNilForKeyPath:@"id_str"];
+}
+
 - (NSString *)userName {
     return [self.data valueOrNilForKeyPath:@"user.name"];
 }

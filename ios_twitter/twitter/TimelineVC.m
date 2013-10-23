@@ -95,10 +95,11 @@
 //    cell.tweetTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
 //    [cell.tweetTextLabel sizeToFit];
     
-    cell.userImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tweet userImageURL]]]];
+//    cell.userImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[tweet userImageURL]]]]; // slow
+    [cell.userImageView setImageWithURL:[NSURL URLWithString:[tweet userImageURL]]]; // much more smoother scrolling
     CALayer * l = [cell.userImageView layer];
     [l setMasksToBounds:YES];
-    [l setCornerRadius:20.0];
+    [l setCornerRadius:10.0];
     
     cell.tweetAgeTextLabel.text = [tweet createdAt];
     return cell;
