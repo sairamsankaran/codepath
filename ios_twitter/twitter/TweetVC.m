@@ -113,6 +113,8 @@
                                       [alert show];
                                       [alert dismissWithClickedButtonIndex:0 animated:YES];
                                       [self.view endEditing:YES];
+                                      self.replyTextField.text=@"";
+                                      self.replyTextField.placeholder=@"Reply";
                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                                       message:[error localizedDescription]
