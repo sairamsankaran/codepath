@@ -96,9 +96,9 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     NSNumberFormatter *tI = [[NSNumberFormatter alloc] init];
     [tI setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *tweetId = [tI numberFromString:idStr];
-    NSLog(@"%@",tweetId);
+    //NSLog(@"%@",tweetId);
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id":tweetId}];
-    [self postPath:@"1.1/statuses/retweet/:id.json"
+    [self postPath:[NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/%@.json", tweetId]
         parameters:params
            success:success
            failure:failure];

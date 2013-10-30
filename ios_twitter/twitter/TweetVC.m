@@ -11,6 +11,9 @@
 #import "TwitterClient.h"
 
 @interface TweetVC ()
+{
+    CGFloat keyboardHeight;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *replyTextField;
 
@@ -36,6 +39,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,15 +60,48 @@
     [l setCornerRadius:20.0];
     self.tweetTextLabel.text = self.tweet.text;
     self.tweetAgeTextLabel.text = self.tweet.createdAt;
+    self.replyTextField.text = [NSString stringWithFormat:@"@%@ ",self.tweet.userTweetHandle];
 }
 
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES]; // keyboard goes off
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self animateTextField:textField up:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self animateTextField:textField up:NO];
+}
+
+- (void) animateTextField: (UITextField*) textField up:(BOOL) up
+{
+    const int movementDistance = 60;
+    const float movementDuration = 0.3f;
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    // Get the size of the keyboard.
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGFloat height  = ceilf(keyboardSize.height);
+    self->keyboardHeight = height;
+    NSLog(@"%f", height);
+}
+
 - (IBAction)retweetButtonTouchDown:(id)sender {
-    NSLog(@"Retweeted");
-    NSLog(@"%@", self.tweet.tweetIdStr);
+    //NSLog(@"Retweeted");
+    //NSLog(@"%@", self.tweet.tweetIdStr);
     [[TwitterClient instance] reTweetStatusWithId:self.tweet.tweetIdStr
                                       withSuccess:^(AFHTTPRequestOperation *operation, id response) {
                                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"

@@ -22,6 +22,10 @@
     return [self.data valueOrNilForKeyPath:@"user.name"];
 }
 
+- (NSString *)userTweetHandle {
+    return [self.data valueOrNilForKeyPath:@"user.screen_name"];
+}
+
 - (NSString *)createdAt {
     NSString *dateStr = [self.data valueOrNilForKeyPath:@"created_at"];
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TweetVC">
@@ -56,7 +56,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-ml-tio">
-                    <rect key="frame" x="60" y="264" width="70" height="30"/>
+                    <rect key="frame" x="60" y="264" width="70" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="lSa-Cl-MRW"/>
@@ -71,7 +71,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMX-44-vah">
-                    <rect key="frame" x="173" y="264" width="87" height="30"/>
+                    <rect key="frame" x="173" y="264" width="87" height="27"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                     <state key="normal" title="FAVOURITE">
@@ -81,15 +81,22 @@
                         <action selector="favouriteButtonTouchDown:" destination="-1" eventType="touchDown" id="RmO-jG-PXS"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reply" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I9Y-5e-Vhu">
-                    <rect key="frame" x="0.0" y="305" width="278" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reply" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I9Y-5e-Vhu">
+                    <rect key="frame" x="5" y="291" width="273" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                     <textInputTraits key="textInputTraits" keyboardType="twitter"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="VIS-3D-Yai"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRj-3V-Kfk">
-                    <rect key="frame" x="278" y="305" width="42" height="30"/>
+                    <rect key="frame" x="278" y="290" width="42" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="ukW-h3-ajR"/>
+                        <constraint firstAttribute="height" constant="30" id="wAF-Lx-Fvm"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                     <state key="normal" title="Tweet">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,13 +119,11 @@
                 <constraint firstItem="xhQ-E9-qFp" firstAttribute="leading" secondItem="MVi-ah-l15" secondAttribute="trailing" constant="8" symbolic="YES" id="LZM-0l-nYl"/>
                 <constraint firstItem="aMX-44-vah" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="50" id="Nb0-8q-UGb"/>
                 <constraint firstItem="aMX-44-vah" firstAttribute="top" secondItem="aj0-ml-tio" secondAttribute="top" id="Q01-PM-OdK"/>
-                <constraint firstItem="FRj-3V-Kfk" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="91" id="Vd5-uL-G5b"/>
-                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="top" secondItem="FRj-3V-Kfk" secondAttribute="top" id="VhU-MH-KGB"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="top" secondItem="ftJ-0c-bfk" secondAttribute="bottom" constant="35" id="QXf-Oq-0pn"/>
                 <constraint firstAttribute="trailing" secondItem="g8F-iC-3Jb" secondAttribute="trailing" constant="20" symbolic="YES" id="XpE-2N-y8A"/>
                 <constraint firstItem="aj0-ml-tio" firstAttribute="top" secondItem="ftJ-0c-bfk" secondAttribute="bottom" constant="8" symbolic="YES" id="YdF-IY-Crs"/>
-                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="top" secondItem="aj0-ml-tio" secondAttribute="bottom" constant="11" id="cew-Go-lEx"/>
                 <constraint firstItem="aj0-ml-tio" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="60" id="dlb-Dn-LH4"/>
-                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="bottom" secondItem="FRj-3V-Kfk" secondAttribute="bottom" id="g6C-MA-L8L"/>
+                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="5" id="gzq-Fj-yIY"/>
                 <constraint firstItem="g8F-iC-3Jb" firstAttribute="top" secondItem="xhQ-E9-qFp" secondAttribute="bottom" constant="51" id="hj0-5C-4uM"/>
                 <constraint firstItem="I9Y-5e-Vhu" firstAttribute="baseline" secondItem="FRj-3V-Kfk" secondAttribute="baseline" id="j5l-TZ-MWy"/>
                 <constraint firstItem="I9Y-5e-Vhu" firstAttribute="trailing" secondItem="xhQ-E9-qFp" secondAttribute="trailing" id="lxL-nH-tLh"/>
@@ -126,7 +131,6 @@
                 <constraint firstItem="aMX-44-vah" firstAttribute="bottom" secondItem="aj0-ml-tio" secondAttribute="bottom" id="rnf-fT-FCy"/>
                 <constraint firstAttribute="trailing" secondItem="FRj-3V-Kfk" secondAttribute="trailing" id="sLy-Wa-O45"/>
                 <constraint firstItem="ftJ-0c-bfk" firstAttribute="top" secondItem="g8F-iC-3Jb" secondAttribute="bottom" constant="22" id="tIN-Gr-AvU"/>
-                <constraint firstItem="I9Y-5e-Vhu" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="udd-CO-kVR"/>
                 <constraint firstAttribute="trailing" secondItem="aMX-44-vah" secondAttribute="trailing" constant="60" id="wHY-uG-bii"/>
                 <constraint firstItem="MVi-ah-l15" firstAttribute="top" secondItem="1" secondAttribute="top" constant="88" id="wdp-EM-EO2"/>
             </constraints>

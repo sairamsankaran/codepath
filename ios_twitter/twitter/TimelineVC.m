@@ -13,7 +13,9 @@
 #import "UIImageView+AFNetworking.h"
 
 @interface TimelineVC ()
-
+{
+    int requestCount;
+}
 @property (nonatomic, strong) NSMutableArray *tweets;
 
 - (void)onSignOutButton;
@@ -102,19 +104,47 @@
     [l setCornerRadius:10.0];
     
     cell.tweetAgeTextLabel.text = [tweet createdAt];
+    //NSLog(@"%@", tweet.userTweetHandle);
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    NSString *tweetText = [self.tweets[indexPath.row] text];
-    //    NSLog(@"%@", tweetText);
-    //    CGSize tweetSize = [tweetText sizeWithFont:[UIFont fontWithName:@"Helvetica Neue" size:14.0]
-    //                                  forWidth:260.0
-    //                             lineBreakMode:NSLineBreakByWordWrapping];
-    //    NSLog(@"%f", tweetSize.height);
-    //    return tweetSize.height + 40;
-    return 70;
+    Tweet *tweet = self.tweets[indexPath.row];
+    UIFont * font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
+    NSAttributedString *attributedText =
+    [[NSAttributedString alloc]
+     initWithString:tweet.text
+     attributes:@
+     {
+     NSFontAttributeName: font
+     }];
+    
+    // TODO: Must be a better way than hardcoding the width...
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){320.0, CGFLOAT_MAX}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    CGSize size = rect.size;
+    CGFloat height  = ceilf(size.height);
+    return height + 60;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat actualPosition = scrollView.contentOffset.y;
+    CGFloat contentHeight = scrollView.contentSize.height - 600;
+    if (actualPosition >= contentHeight && requestCount < 10) {
+        requestCount++;
+        [[TwitterClient instance] homeTimelineWithCount:20
+                                                sinceId:0
+                                                  maxId:0
+                                                success:^(AFHTTPRequestOperation *operation, id response) {
+                                                    [self.tweets addObjectsFromArray:[Tweet tweetsWithArray:response]];
+                                                    [self.tableView reloadData];
+                                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                    [alert show];
+                                                }];
+    }
 }
 
 /*
@@ -210,6 +240,7 @@
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
+
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
